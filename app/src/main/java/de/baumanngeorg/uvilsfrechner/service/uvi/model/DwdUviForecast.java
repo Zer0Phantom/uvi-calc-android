@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DwdUviForecast {
-    private int today, tomorrow, dayafter_to;
+    private int today;
+    private int tomorrow;
+    private int dayafter_to;
 }

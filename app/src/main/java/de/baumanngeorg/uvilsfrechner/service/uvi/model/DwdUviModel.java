@@ -12,7 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DwdUviModel {
-    private String last_update, next_update, name, sender;
+    private String last_update;
+    private String next_update;
+    private String name;
+    private String sender;
 
     private List<DwdUviContent> content;
 

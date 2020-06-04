@@ -32,7 +32,6 @@ public class DwdContainer {
                 .build();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public String getUpdateString(String city) {
         DwdUviForecast forecast = getContentByCity(city).getForecast();
         return "Vorhersage für " +
@@ -50,7 +49,6 @@ public class DwdContainer {
                 model.getSender();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public DwdUviContent getContentByCity(String stadt) {
         return model.getContent().stream()
                 .filter(city -> stadt.equals(city.getCity()))
@@ -66,13 +64,11 @@ public class DwdContainer {
         return getDateFromDwdString(model.getLast_update());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public LocalDate getForecastDay() {
         int[] forecastDay = stringArrayToInt(model.getForecast_day().split("-"));
         return LocalDate.of(forecastDay[0], forecastDay[1], forecastDay[2]);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private LocalDateTime getDateFromDwdString(String datesting) {
         String[] dateTime = datesting.split("T");
         int[] date = stringArrayToInt(dateTime[0].split("-"));
@@ -80,7 +76,6 @@ public class DwdContainer {
         return LocalDateTime.of(date[0], date[1], date[2], time[0], time[1], time[2]);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private int[] stringArrayToInt(String[] sarray) {
         return Arrays.stream(sarray).mapToInt(Integer::parseInt).toArray();
     }
