@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stadt Preference -->
+    <string-array name="stadt_entries_values">
+        <item>Arkona</item>
+        <item>Berlin</item>
+        <item>Bonn</item>
+        <item>Bremen</item>
+        <item>Cottbus</item>
+        <item>Dresden</item>
+        <item>Düsseldorf</item>
+        <item>Frankfurt/Main</item>
+        <item>Freiburg</item>
+        <item>Großer Arber</item>
+        <item>Hahn</item>
+        <item>Hamburg</item>
+        <item>Hannover</item>
+        <item>Kahler Asten</item>
+        <item>Kassel</item>
+        <item>Kiel</item>
+        <item>Konstanz</item>
+        <item>Leipzig</item>
+        <item>List auf Sylt</item>
+        <item>Magdeburg</item>
+        <item>Marienleuchte</item>
+        <item>München</item>
+        <item>Neubrandenburg</item>
+        <item>Norderney</item>
+        <item>Nürnberg</item>
+        <item>Osnabrück</item>
+        <item>Regensburg</item>
+        <item>Rostock</item>
+        <item>Sankt Peter-Ording</item>
+        <item>Seehausen</item>
+        <item>Stuttgart</item>
+        <item>Ulm</item>
+        <item>Waren</item>
+        <item>Weimar</item>
+        <item>Weinbiet</item>
+        <item>Wernigerode</item>
+        <item>Würzburg</item>
+        <item>Zugspitze</item>
+    </string-array>
+
+    <string-array name="hauttypen_entries">
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+        <item>V</item>
+        <item>VI</item>
+    </string-array>
+
+    <string-array name="hauttypen_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="med_schritte_values_entries">
+        <item>10</item>
+        <item>15</item>
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+    </string-array>
+</resources>

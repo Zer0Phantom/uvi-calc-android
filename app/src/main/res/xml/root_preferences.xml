@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Standort für die UVI Daten">
+        <ListPreference
+            app:defaultValue="Berlin"
+            app:entries="@array/stadt_entries_values"
+            app:entryValues="@array/stadt_entries_values"
+            app:key="stadt"
+            app:title="Stadt"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Angaben über den eigenen Hauttyp">
+        <ListPreference
+            app:defaultValue="2"
+            app:entries="@array/hauttypen_entries"
+            app:entryValues="@array/hauttypen_values"
+            app:key="hauttyp"
+            app:title="Hauttyp"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="25"
+            app:entries="@array/med_schritte_values_entries"
+            app:entryValues="@array/med_schritte_values_entries"
+            app:key="med_schritte"
+            app:title="MED Schrittgröße"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
