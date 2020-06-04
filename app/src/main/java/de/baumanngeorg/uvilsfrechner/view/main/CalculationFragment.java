@@ -13,8 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import java.util.Objects;
-
 import de.baumanngeorg.uvilsfrechner.R;
 import de.baumanngeorg.uvilsfrechner.service.storage.StorageManager;
 import de.baumanngeorg.uvilsfrechner.service.uvi.SunRiseSetCalc;
@@ -51,23 +49,23 @@ public class CalculationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tvUvi = Objects.requireNonNull(getView()).findViewById(R.id.tvUvi);
-        sbUvi = getView().findViewById(R.id.sbUvi);
+        tvUvi = requireView().findViewById(R.id.tvUvi);
+        sbUvi = requireView().findViewById(R.id.sbUvi);
 
-        tvMed = getView().findViewById(R.id.tvMed);
-        sbMed = getView().findViewById(R.id.sbMed);
+        tvMed = requireView().findViewById(R.id.tvMed);
+        sbMed = requireView().findViewById(R.id.sbMed);
 
-        tvLsf = getView().findViewById(R.id.tvLsf);
-        tvHowLongOutside = getView().findViewById(R.id.tvHowLongOutside);
-        sbLsf = getView().findViewById(R.id.sbLsf);
+        tvLsf = requireView().findViewById(R.id.tvLsf);
+        tvHowLongOutside = requireView().findViewById(R.id.tvHowLongOutside);
+        sbLsf = requireView().findViewById(R.id.sbLsf);
 
-        tvZeit = getView().findViewById(R.id.tvZeit);
-        tvWhatLsf = getView().findViewById(R.id.tvWhatLsf);
-        sbZeit = getView().findViewById(R.id.sbZeit);
+        tvZeit = requireView().findViewById(R.id.tvZeit);
+        tvWhatLsf = requireView().findViewById(R.id.tvWhatLsf);
+        sbZeit = requireView().findViewById(R.id.sbZeit);
 
-        etTimeSpend = getView().findViewById(R.id.etSpendTime);
+        etTimeSpend = requireView().findViewById(R.id.etSpendTime);
 
-        tvUviInfo = getView().findViewById(R.id.tvUviTextInfo);
+        tvUviInfo = requireView().findViewById(R.id.tvUviTextInfo);
     }
 
     @Override
@@ -80,12 +78,14 @@ public class CalculationFragment extends Fragment {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                // No interactions needed
+                // here
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+// no interactions
+                // needed here
             }
         };
 
@@ -97,7 +97,8 @@ public class CalculationFragment extends Fragment {
         etTimeSpend.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                // no interactions
+                // needed here
             }
 
             @Override
@@ -107,7 +108,8 @@ public class CalculationFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+// no interactions
+                // needed here
             }
         });
         sbMed.setProgress(StorageManager.getInstance().getDefaultMed());
@@ -118,7 +120,7 @@ public class CalculationFragment extends Fragment {
     @Override
     public void onResume() {
         UviRetrievingService.getInstance().setUvi(this);
-        sbZeit.setProgress((int) Math.round(((SunRiseSetCalc.getSunshineDuration() - 30D) / 30D)), true);
+        sbZeit.setProgress((int) Math.round(((SunRiseSetCalc.getSunshineDuration() - 30D) / 30D)));
         setMedScale();
         updateSeekBarValues();
 
@@ -126,7 +128,7 @@ public class CalculationFragment extends Fragment {
     }
 
     public void setUviSeekbar(int value) {
-        sbUvi.setProgress(value, true);
+        sbUvi.setProgress(value);
     }
 
     public void setUpdateString(String string) {
