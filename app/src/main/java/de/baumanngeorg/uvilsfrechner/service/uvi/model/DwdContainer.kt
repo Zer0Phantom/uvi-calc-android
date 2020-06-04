@@ -5,24 +5,9 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class DwdContainer {
-    var model = baseModel
-
-    constructor(model: DwdUviModel) {
-        this.model = model
-    }
-
-    constructor() {}
-
-    private val baseModel: DwdUviModel
-        private get() = DwdUviModel.builder()
-                .forecast_day("XTX")
-                .last_update("2000-01-01T10:10:10")
-                .next_update("2000-01-01T10:10:10")
-                .sender("XTX")
-                .name("XTX")
-                .content(listOf(DwdUviContent("Berlin", DwdUviForecast(8, 8, 8))))
-                .build()
+data class DwdContainer(
+        val model : DwdUviModel
+) {
 
     fun getUpdateString(city: String): String {
         val forecast = getContentByCity(city).forecast
@@ -60,31 +45,5 @@ Quelle: ${model.sender}"""
 
     private fun stringArrayToInt(sarray: Array<String>): IntArray {
         return Arrays.stream(sarray).mapToInt { s: String -> s.toInt() }.toArray()
-    }
-
-    override fun equals(o: Any?): Boolean {
-        if (o === this) return true
-        if (o !is DwdContainer) return false
-        val other = o
-        if (!other.canEqual(this as Any)) return false
-        val `this$model`: Any = model
-        val `other$model`: Any = other.model
-        return if (`this$model` == null) `other$model` == null else `this$model` == `other$model`
-    }
-
-    protected fun canEqual(other: Any?): Boolean {
-        return other is DwdContainer
-    }
-
-    override fun hashCode(): Int {
-        val PRIME = 59
-        var result = 1
-        val `$model`: Any = model
-        result = result * PRIME + (`$model`?.hashCode() ?: 43)
-        return result
-    }
-
-    override fun toString(): String {
-        return "DwdContainer(model=" + model + ")"
     }
 }
