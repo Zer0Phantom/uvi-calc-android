@@ -176,15 +176,12 @@ public class CalculationFragment extends Fragment {
      * @return [max, min, steps]
      */
     private int[] getMedScale() {
-        int min = 250, max = 400;
+        int min;
+        int max;
         switch (StorageManager.getInstance().getPreferredSkinType()) {
             case 1:
                 min = 150;
                 max = 300;
-                break;
-            case 2:
-                min = 250;
-                max = 400;
                 break;
             case 3:
                 min = 300;
@@ -201,6 +198,11 @@ public class CalculationFragment extends Fragment {
             case 6:
                 min = 900;
                 max = 1500;
+                break;
+            case 2:
+            default:
+                min = 250;
+                max = 400;
                 break;
         }
         int steps = StorageManager.getInstance().getPreferredMedSteps();
