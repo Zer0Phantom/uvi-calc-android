@@ -59,7 +59,7 @@ public class UviRetrievingService {
                     Request.Method.GET, url, response -> {
                 byte[] ptext = response.getBytes(ISO_8859_1);
                 String value = new String(ptext, UTF_8);
-                container.setModel(gson.fromJson(value, DwdUviModel.class));
+                container.model = gson.fromJson(value, DwdUviModel.class);
                 DwdUviContent uviContentNew = container.getContentByCity(stadt);
                 StorageManager.getInstance().setStoredUviContainer(container);
 
