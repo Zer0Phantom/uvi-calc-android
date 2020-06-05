@@ -4,7 +4,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import de.baumanngeorg.uvilsfrechner.service.internet.InternetResourceLoader;
@@ -48,18 +48,18 @@ public class UviRetrievingService {
     }
 
     public void setUvi(final CalculationFragment calculationFragment) {
-        LocalDateTime today = LocalDateTime.now();
+        Date today = new Date();
         String stadt = StorageManager.getInstance().getPreferredCity();
         DwdUviContent uviContent = container.getContentByCity(stadt);
 
-        if (today.isAfter(container.getNextUpdate())) {
+        if (today.after(container.getNextUpdate())) {
             LOG.info("Load new data from DWD");
 
             StringRequest stringRequest = new StringRequest(
                     Request.Method.GET, url, response -> {
                 byte[] ptext = response.getBytes(ISO_8859_1);
                 String value = new String(ptext, UTF_8);
-                container.model = gson.fromJson(value, DwdUviModel.class);
+                container.setModel(gson.fromJson(value, DwdUviModel.class));
                 DwdUviContent uviContentNew = container.getContentByCity(stadt);
                 StorageManager.getInstance().setStoredUviContainer(container);
 
@@ -76,11 +76,11 @@ public class UviRetrievingService {
         }
     }
 
-    private int getUviDependendOnDate(LocalDateTime today, DwdUviContent uviContent) {
+    private int getUviDependendOnDate(Date today, DwdUviContent uviContent) {
         int uvi;
-        if (today.getDayOfYear() == container.getForecastDay().getDayOfYear()) {
+        if (today.getDate() + today.getMonth() + today.getYear() == container.getForecastDay().getDate() + container.getForecastDay().getMonth() + container.getForecastDay().getYear()) {
             uvi = uviContent.getForecast().getToday();
-        } else if (today.getDayOfYear() == container.getForecastDay().plusDays(1).getDayOfYear()) {
+        } else if (today.getDate() == container.getForecastDay().getDate() + 1) {
             uvi = uviContent.getForecast().getTomorrow();
         } else {
             uvi = uviContent.getForecast().getDayafter_to();
