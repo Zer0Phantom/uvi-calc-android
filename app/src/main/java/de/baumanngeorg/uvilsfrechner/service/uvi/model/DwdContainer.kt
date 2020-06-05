@@ -19,9 +19,9 @@ data class DwdContainer(
 
     val nextUpdate: Date? = getDateFromDwdString(model.next_update)
 
-    val forecastDay: Date? = SimpleDateFormat("yyyy-MM-dd", Locale.GERMANY).parse(model.forecast_day)
+    val forecastDay: Date? = SimpleDateFormat("yyyy-MM-dd").parse(model.forecast_day)
 
     private val getLastUpdate: Date? = getDateFromDwdString(model.last_update)
 
-    private fun getDateFromDwdString(dateString: String) = SimpleDateFormat("yyyy-MM-ddThh:mm:ss", Locale.GERMANY).parse(dateString)
+    private fun getDateFromDwdString(dateString: String) = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateString)
 }
