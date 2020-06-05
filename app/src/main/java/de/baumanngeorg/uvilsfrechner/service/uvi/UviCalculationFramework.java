@@ -23,7 +23,7 @@ public class UviCalculationFramework {
             return "Kein LSF notwendig.";
         }
 
-        double lsfCalculated = (zeit / ((med / (2D * uvi) - minAlreadySpend))) * 2;
+        double lsfCalculated = (zeit / (med / (2D * uvi) - minAlreadySpend)) * 2;
         if (lsfCalculated < 0 || lsfCalculated > 55) {
             return "Es gibt leider keinen groß genügenden LSF.";
         }
