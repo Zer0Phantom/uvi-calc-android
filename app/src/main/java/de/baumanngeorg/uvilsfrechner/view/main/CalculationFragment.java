@@ -84,7 +84,7 @@ public class CalculationFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-// no interactions
+                // no interactions
                 // needed here
             }
         };
@@ -108,7 +108,7 @@ public class CalculationFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-// no interactions
+                // no interactions
                 // needed here
             }
         });
