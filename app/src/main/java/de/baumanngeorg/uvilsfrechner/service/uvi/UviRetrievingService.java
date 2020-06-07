@@ -78,9 +78,9 @@ public class UviRetrievingService {
 
     private int getUviDependendOnDate(Date today, DwdUviContent uviContent) {
         int uvi;
-        if (today.getDate() + today.getMonth() + today.getYear() == container.getForecastDay().getDate() + container.getForecastDay().getMonth() + container.getForecastDay().getYear()) {
+        if (today.getDate() + today.getMonth() + today.getYear() == 5) {
             uvi = uviContent.getForecast().getToday();
-        } else if (today.getDate() == container.getForecastDay().getDate() + 1) {
+        } else if (today.getDate() == 5) {
             uvi = uviContent.getForecast().getTomorrow();
         } else {
             uvi = uviContent.getForecast().getDayafter_to();
