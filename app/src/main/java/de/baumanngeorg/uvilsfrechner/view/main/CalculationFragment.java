@@ -14,10 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import de.baumanngeorg.uvilsfrechner.R;
-import de.baumanngeorg.uvilsfrechner.service.storage.StorageManager;
-import de.baumanngeorg.uvilsfrechner.service.uvi.SunRiseSetCalc;
-import de.baumanngeorg.uvilsfrechner.service.uvi.UviCalculationFramework;
-import de.baumanngeorg.uvilsfrechner.service.uvi.UviRetrievingService;
+import de.baumanngeorg.uvilsfrechner.service.StorageService;
+import de.baumanngeorg.uvilsfrechner.service.SunRiseSetCalculationService;
+import de.baumanngeorg.uvilsfrechner.service.UviCalculationService;
+import de.baumanngeorg.uvilsfrechner.datasource.dwd.UviRetrievingService;
 
 public class CalculationFragment extends Fragment {
     private TextView tvUvi;
@@ -112,7 +112,7 @@ public class CalculationFragment extends Fragment {
                 // needed here
             }
         });
-        sbMed.setProgress(StorageManager.getInstance().getDefaultMed());
+        sbMed.setProgress(StorageService.getInstance().getDefaultMed());
 
         super.onStart();
     }
@@ -120,7 +120,7 @@ public class CalculationFragment extends Fragment {
     @Override
     public void onResume() {
         UviRetrievingService.getInstance().setUvi(this);
-        sbZeit.setProgress((int) Math.round(((SunRiseSetCalc.getSunshineDuration() - 30D) / 30D)));
+        sbZeit.setProgress((int) Math.round(((SunRiseSetCalculationService.INSTANCE.getSunshineDuration() - 30D) / 30D)));
         setMedScale();
         updateSeekBarValues();
 
@@ -136,7 +136,7 @@ public class CalculationFragment extends Fragment {
     }
 
     private void updateSeekBarValues() {
-        UviCalculationFramework uviCalcFw = UviCalculationFramework.builder()
+        UviCalculationService uviCalcFw = UviCalculationService.builder()
                 .minAlreadySpend(getMinAlreadySpend())
                 .uvi(getUvi())
                 .med(getMed())
@@ -161,7 +161,7 @@ public class CalculationFragment extends Fragment {
     }
 
     private int getMed() {
-        StorageManager.getInstance().setDefaultMed(sbMed.getProgress());
+        StorageService.getInstance().setDefaultMed(sbMed.getProgress());
         int[] scaleParams = getMedScale();
         int med = sbMed.getProgress() * scaleParams[2] + scaleParams[1];
         tvMed.setText(String.valueOf(med));
@@ -171,7 +171,7 @@ public class CalculationFragment extends Fragment {
     private void setMedScale() {
         int[] scaleParams = getMedScale();
         sbMed.setMax((scaleParams[0] - scaleParams[1]) / scaleParams[2]);
-        sbMed.setProgress(StorageManager.getInstance().getDefaultMed());
+        sbMed.setProgress(StorageService.getInstance().getDefaultMed());
     }
 
     /**
@@ -180,7 +180,7 @@ public class CalculationFragment extends Fragment {
     private int[] getMedScale() {
         int min;
         int max;
-        switch (StorageManager.getInstance().getPreferredSkinType()) {
+        switch (StorageService.getInstance().getPreferredSkinType()) {
             case 1:
                 min = 150;
                 max = 300;
@@ -207,7 +207,7 @@ public class CalculationFragment extends Fragment {
                 max = 400;
                 break;
         }
-        int steps = StorageManager.getInstance().getPreferredMedSteps();
+        int steps = StorageService.getInstance().getPreferredMedSteps();
         return new int[]{max, min, steps};
     }
 

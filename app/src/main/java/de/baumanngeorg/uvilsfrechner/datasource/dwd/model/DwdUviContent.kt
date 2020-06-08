@@ -1,4 +1,4 @@
-package de.baumanngeorg.uvilsfrechner.service.uvi.model
+package de.baumanngeorg.uvilsfrechner.datasource.dwd.model
 
 data class DwdUviContent(
         val city: String = "Berlin",

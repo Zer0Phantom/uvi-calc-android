@@ -1,4 +1,4 @@
-package de.baumanngeorg.uvilsfrechner.service.uvi;
+package de.baumanngeorg.uvilsfrechner.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UviCalculationFramework {
+public class UviCalculationService {
 
     int uvi;
     int zeit;

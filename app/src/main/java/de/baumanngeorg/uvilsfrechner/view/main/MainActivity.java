@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import de.baumanngeorg.uvilsfrechner.R;
-import de.baumanngeorg.uvilsfrechner.service.internet.InternetResourceLoader;
-import de.baumanngeorg.uvilsfrechner.service.storage.StorageManager;
+import de.baumanngeorg.uvilsfrechner.datasource.InternetResourceLoader;
+import de.baumanngeorg.uvilsfrechner.service.StorageService;
 import de.baumanngeorg.uvilsfrechner.view.about.AboutActivity;
 import de.baumanngeorg.uvilsfrechner.view.settings.SettingsActivity;
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Load Preferences
-        StorageManager.initializeSettingsmanager(this.getApplicationContext());
+        StorageService.initializeSettingsmanager(this.getApplicationContext());
 
         // Load Network Connection
         InternetResourceLoader.initializeInternetResourceLoader(this.getApplicationContext());
@@ -31,19 +31,19 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (StorageManager.getInstance().isDsgvoAccepted()) {
+        if (StorageService.getInstance().isDsgvoAccepted()) {
             onCreateAfterDsgvo();
         } else {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this)
                     .setMessage("Der DWD speichert die IP für maximal sieben Tage zur Verbesserung des Service.")
                     .setTitle("Datenschutzbedingungen")
                     .setPositiveButton("Zustimmen", (dialog, which) -> {
-                        StorageManager.getInstance().setDsgvoAccepted();
+                        StorageService.getInstance().setDsgvoAccepted();
                         onCreateAfterDsgvo();
                     })
                     .setNegativeButton("Ablehnen", (dialog, which) -> MainActivity.super.finish())
                     .setOnDismissListener(dialog -> {
-                        if (StorageManager.getInstance().isDsgvoAccepted()) {
+                        if (StorageService.getInstance().isDsgvoAccepted()) {
                             onCreateAfterDsgvo();
                         } else {
                             MainActivity.super.finish();

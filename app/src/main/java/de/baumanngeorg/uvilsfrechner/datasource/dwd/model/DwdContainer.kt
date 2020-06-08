@@ -1,6 +1,6 @@
-package de.baumanngeorg.uvilsfrechner.service.uvi.model
+package de.baumanngeorg.uvilsfrechner.datasource.dwd.model
 
-import java.text.SimpleDateFormat
+import de.baumanngeorg.uvilsfrechner.config.toString
 import java.util.*
 
 data class DwdContainer(
@@ -13,7 +13,7 @@ data class DwdContainer(
                 .append("${todayPlus(0)} UV ${forecast.today} | ")
                 .append("${todayPlus(1)} UV ${forecast.tomorrow} | ")
                 .append("${todayPlus(2)} UV ${forecast.dayafter_to}\n")
-                .append("Daten vom ${getLastUpdate?.date}.${getLastUpdate?.month}\n")
+                .append("Daten vom ${getLastUpdate()}\n")
                 .append("Quelle: ${model.sender}")
                 .toString()
     }
@@ -25,25 +25,28 @@ data class DwdContainer(
 
     val nextUpdate: Date? = getDateFromDwdString(model.next_update)
 
-    private fun todayPlus(amountDays: Int) : String {
+    private fun todayPlus(amountDays: Int): String {
         val date = forecastDayDate()
         date.add(Calendar.DAY_OF_MONTH, amountDays)
         return date.time.toString("dd.MM.")
     }
 
-    private fun forecastDayDate() : Calendar {
+    private fun forecastDayDate(): Calendar {
         val date = model.forecast_day.split("-").map { it.toInt() }
         val calendar = Calendar.getInstance()
-        calendar.set(date[0], date[1]-1, date[2])
+        calendar.set(date[0], date[1] - 1, date[2])
         return calendar
     }
 
-    private val getLastUpdate: Date? = getDateFromDwdString(model.last_update)
+    private fun getLastUpdate(): String {
+        return getDateFromDwdString(model.last_update).toString("dd.MM.' 'hh:mm' Uhr'")
+    }
 
-    private fun getDateFromDwdString(dateString: String) = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.GERMANY).parse(dateString)
-
-    private fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
-        val formatter = SimpleDateFormat(format, locale)
-        return formatter.format(this)
+    private fun getDateFromDwdString(dateString: String): Date {
+        val date = dateString.split("T")[0].split("-")
+        val time = dateString.split("T")[1].split(":")
+        val calendar = Calendar.getInstance()
+        calendar.set(date[0].toInt(), date[1].toInt() - 1, date[2].toInt(), time[0].toInt(), time[1].toInt(), time[2].toInt())
+        return calendar.time
     }
 }

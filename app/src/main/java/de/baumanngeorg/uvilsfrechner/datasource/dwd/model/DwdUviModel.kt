@@ -1,4 +1,6 @@
-package de.baumanngeorg.uvilsfrechner.service.uvi.model
+package de.baumanngeorg.uvilsfrechner.datasource.dwd.model
+
+import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdUviContent
 
 data class DwdUviModel(
         val last_update: String = "2000-01-01T10:10:10",
