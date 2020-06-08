@@ -48,3 +48,6 @@
 }
 
 ##---------------End: proguard configuration for Gson  ----------
+
+## After R8 upgrade issues while loading fragments:
+-keepnames class androidx.navigation.fragment.NavHostFragment

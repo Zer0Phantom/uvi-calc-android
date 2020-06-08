@@ -1,4 +1,4 @@
-package de.baumanngeorg.uvilsfrechner.service.internet;
+package de.baumanngeorg.uvilsfrechner.datasource;
 
 import android.content.Context;
 

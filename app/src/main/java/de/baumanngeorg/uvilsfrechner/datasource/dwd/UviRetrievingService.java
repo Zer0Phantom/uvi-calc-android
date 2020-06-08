@@ -1,4 +1,4 @@
-package de.baumanngeorg.uvilsfrechner.service.uvi;
+package de.baumanngeorg.uvilsfrechner.datasource.dwd;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
@@ -7,11 +7,11 @@ import com.google.gson.Gson;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import de.baumanngeorg.uvilsfrechner.service.internet.InternetResourceLoader;
-import de.baumanngeorg.uvilsfrechner.service.storage.StorageManager;
-import de.baumanngeorg.uvilsfrechner.service.uvi.model.DwdContainer;
-import de.baumanngeorg.uvilsfrechner.service.uvi.model.DwdUviContent;
-import de.baumanngeorg.uvilsfrechner.service.uvi.model.DwdUviModel;
+import de.baumanngeorg.uvilsfrechner.datasource.InternetResourceLoader;
+import de.baumanngeorg.uvilsfrechner.service.StorageService;
+import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdContainer;
+import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdUviContent;
+import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdUviModel;
 import de.baumanngeorg.uvilsfrechner.view.main.CalculationFragment;
 import lombok.Setter;
 
@@ -32,7 +32,7 @@ public class UviRetrievingService {
     private UviRetrievingService() {
         gson = new Gson();
         url = "https://opendata.dwd.de/climate_environment/health/alerts/uvi.json";
-        container = StorageManager.getInstance().getStoredUviContainer();
+        container = StorageService.getInstance().getStoredUviContainer();
         if (container == null) {
             LOG.info("Container is null! Getting new one");
             container = new DwdContainer();
@@ -49,7 +49,7 @@ public class UviRetrievingService {
 
     public void setUvi(final CalculationFragment calculationFragment) {
         Date today = new Date();
-        String stadt = StorageManager.getInstance().getPreferredCity();
+        String stadt = StorageService.getInstance().getPreferredCity();
         DwdUviContent uviContent = container.getContentByCity(stadt);
 
         if (today.after(container.getNextUpdate())) {
@@ -61,7 +61,7 @@ public class UviRetrievingService {
                 String value = new String(ptext, UTF_8);
                 container.setModel(gson.fromJson(value, DwdUviModel.class));
                 DwdUviContent uviContentNew = container.getContentByCity(stadt);
-                StorageManager.getInstance().setStoredUviContainer(container);
+                StorageService.getInstance().setStoredUviContainer(container);
 
                 calculationFragment.setUviSeekbar(getUviDependendOnDate(today, uviContentNew));
                 calculationFragment.setUpdateString(container.getUpdateString(uviContentNew.getCity()));
@@ -78,9 +78,9 @@ public class UviRetrievingService {
 
     private int getUviDependendOnDate(Date today, DwdUviContent uviContent) {
         int uvi;
-        if (today.getDate() + today.getMonth() + today.getYear() == container.getForecastDay().getDate() + container.getForecastDay().getMonth() + container.getForecastDay().getYear()) {
+        if (today.getDate() + today.getMonth() + today.getYear() == 5) {
             uvi = uviContent.getForecast().getToday();
-        } else if (today.getDate() == container.getForecastDay().getDate() + 1) {
+        } else if (today.getDate() == 5) {
             uvi = uviContent.getForecast().getTomorrow();
         } else {
             uvi = uviContent.getForecast().getDayafter_to();

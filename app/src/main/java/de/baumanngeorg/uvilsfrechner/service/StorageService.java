@@ -1,4 +1,4 @@
-package de.baumanngeorg.uvilsfrechner.service.storage;
+package de.baumanngeorg.uvilsfrechner.service;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,9 +7,9 @@ import androidx.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 
-import de.baumanngeorg.uvilsfrechner.service.uvi.model.DwdContainer;
+import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdContainer;
 
-public class StorageManager {
+public class StorageService {
 
     private static final String DSGVO = "dsgvo";
     private static final String STADT = "stadt";
@@ -17,21 +17,21 @@ public class StorageManager {
     private static final String MED_STEPS = "med_schritte";
     private static final String DEFAULT_MED = "default_med";
 
-    private static StorageManager instance;
+    private static StorageService instance;
 
     private final SharedPreferences preferences;
 
-    private StorageManager(Context context) {
+    private StorageService(Context context) {
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static void initializeSettingsmanager(Context context) {
         if (instance == null) {
-            instance = new StorageManager(context);
+            instance = new StorageService(context);
         }
     }
 
-    public static StorageManager getInstance() {
+    public static StorageService getInstance() {
         return instance;
     }
 
