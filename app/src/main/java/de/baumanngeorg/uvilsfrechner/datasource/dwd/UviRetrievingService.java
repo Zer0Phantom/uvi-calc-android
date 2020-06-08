@@ -4,14 +4,14 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.logging.Logger;
 
 import de.baumanngeorg.uvilsfrechner.datasource.InternetResourceLoader;
-import de.baumanngeorg.uvilsfrechner.service.StorageService;
 import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdContainer;
 import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdUviContent;
 import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdUviModel;
+import de.baumanngeorg.uvilsfrechner.service.StorageService;
 import de.baumanngeorg.uvilsfrechner.view.main.CalculationFragment;
 import lombok.Setter;
 
@@ -48,7 +48,7 @@ public class UviRetrievingService {
     }
 
     public void setUvi(final CalculationFragment calculationFragment) {
-        Date today = new Date();
+        Calendar today = Calendar.getInstance();
         String stadt = StorageService.getInstance().getPreferredCity();
         DwdUviContent uviContent = container.getContentByCity(stadt);
 
@@ -76,11 +76,11 @@ public class UviRetrievingService {
         }
     }
 
-    private int getUviDependendOnDate(Date today, DwdUviContent uviContent) {
+    private int getUviDependendOnDate(Calendar today, DwdUviContent uviContent) {
         int uvi;
-        if (today.getDate() + today.getMonth() + today.getYear() == 5) {
+        if (today.before(container.forecastDayPlusDays(1))) {
             uvi = uviContent.getForecast().getToday();
-        } else if (today.getDate() == 5) {
+        } else if (today.before(container.forecastDayPlusDays(2))) {
             uvi = uviContent.getForecast().getTomorrow();
         } else {
             uvi = uviContent.getForecast().getDayafter_to();
