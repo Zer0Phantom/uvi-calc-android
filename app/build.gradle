@@ -9,7 +9,7 @@ android {
         applicationId "de.baumanngeorg.uvilsfrechner"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 15
+        versionCode 16
         versionName "1.2.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

@@ -33,7 +33,7 @@
 #-keep class com.google.gson.stream.** { *; }
 
 # Application classes that will be serialized/deserialized over Gson
--keep class de.baumanngeorg.uvilsfrechner.datasources.* { <fields>; }
+-keep class de.baumanngeorg.uvilsfrechner.datasources.dwd.model.* { <fields>; }
 
 # Prevent proguard from stripping interface information from TypeAdapter, TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
