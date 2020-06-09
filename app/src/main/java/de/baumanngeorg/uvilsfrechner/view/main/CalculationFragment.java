@@ -14,10 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import de.baumanngeorg.uvilsfrechner.R;
+import de.baumanngeorg.uvilsfrechner.datasources.dwd.DwdClient;
 import de.baumanngeorg.uvilsfrechner.service.StorageService;
 import de.baumanngeorg.uvilsfrechner.service.SunRiseSetCalculationService;
 import de.baumanngeorg.uvilsfrechner.service.UviCalculationService;
-import de.baumanngeorg.uvilsfrechner.datasource.dwd.UviRetrievingService;
+
 
 public class CalculationFragment extends Fragment {
     private TextView tvUvi;
@@ -112,14 +113,15 @@ public class CalculationFragment extends Fragment {
                 // needed here
             }
         });
-        sbMed.setProgress(StorageService.getInstance().getDefaultMed());
+        sbMed.setProgress(StorageService.INSTANCE.getDefaultMed());
 
         super.onStart();
     }
 
     @Override
     public void onResume() {
-        UviRetrievingService.getInstance().setUvi(this);
+        DwdClient.INSTANCE.setUvi(this);
+
         sbZeit.setProgress((int) Math.round(((SunRiseSetCalculationService.INSTANCE.getSunshineDuration() - 30D) / 30D)));
         setMedScale();
         updateSeekBarValues();
@@ -161,7 +163,7 @@ public class CalculationFragment extends Fragment {
     }
 
     private int getMed() {
-        StorageService.getInstance().setDefaultMed(sbMed.getProgress());
+        StorageService.INSTANCE.setDefaultMed(sbMed.getProgress());
         int[] scaleParams = getMedScale();
         int med = sbMed.getProgress() * scaleParams[2] + scaleParams[1];
         tvMed.setText(String.valueOf(med));
@@ -171,7 +173,7 @@ public class CalculationFragment extends Fragment {
     private void setMedScale() {
         int[] scaleParams = getMedScale();
         sbMed.setMax((scaleParams[0] - scaleParams[1]) / scaleParams[2]);
-        sbMed.setProgress(StorageService.getInstance().getDefaultMed());
+        sbMed.setProgress(StorageService.INSTANCE.getDefaultMed());
     }
 
     /**
@@ -180,7 +182,7 @@ public class CalculationFragment extends Fragment {
     private int[] getMedScale() {
         int min;
         int max;
-        switch (StorageService.getInstance().getPreferredSkinType()) {
+        switch (StorageService.INSTANCE.getPreferredSkinType()) {
             case 1:
                 min = 150;
                 max = 300;
@@ -207,7 +209,7 @@ public class CalculationFragment extends Fragment {
                 max = 400;
                 break;
         }
-        int steps = StorageService.getInstance().getPreferredMedSteps();
+        int steps = StorageService.INSTANCE.getPreferredMedSteps();
         return new int[]{max, min, steps};
     }
 
