@@ -1,5 +1,7 @@
 package de.baumanngeorg.uvilsfrechner.datasources.dwd.model
 
+import de.baumanngeorg.uvilsfrechner.config.toDdMmHhMmString
+import de.baumanngeorg.uvilsfrechner.config.toDdMmString
 import de.baumanngeorg.uvilsfrechner.config.toString
 import java.util.*
 
@@ -10,10 +12,10 @@ data class DwdContainer(
     fun getUpdateString(city: String): String {
         val forecast = getContentByCity(city).forecast
         return StringBuilder("Vorhersage für $city:\n")
-                .append("${forecastDayPlusDays(0).time.toString("dd.MM.")} UV ${forecast.today} | ")
-                .append("${forecastDayPlusDays(1).time.toString("dd.MM.")} UV ${forecast.tomorrow} | ")
-                .append("${forecastDayPlusDays(2).time.toString("dd.MM.")} UV ${forecast.dayafter_to}\n")
-                .append("Daten vom ${lastUpdate.time.toString("dd.MM.' 'hh:mm' Uhr'")}\n")
+                .append("${forecastDayPlusDays(0).toDdMmString()} UV ${forecast.today} | ")
+                .append("${forecastDayPlusDays(1).toDdMmString()} UV ${forecast.tomorrow} | ")
+                .append("${forecastDayPlusDays(2).toDdMmString()} UV ${forecast.dayafter_to}\n")
+                .append("Daten vom ${lastUpdate.toDdMmHhMmString()}\n")
                 .append("Quelle: ${model.sender}")
                 .toString()
     }
