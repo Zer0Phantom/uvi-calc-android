@@ -17,7 +17,7 @@ import de.baumanngeorg.uvilsfrechner.R;
 import de.baumanngeorg.uvilsfrechner.service.StorageService;
 import de.baumanngeorg.uvilsfrechner.service.SunRiseSetCalculationService;
 import de.baumanngeorg.uvilsfrechner.service.UviCalculationService;
-import de.baumanngeorg.uvilsfrechner.datasource.dwd.UviRetrievingService;
+import de.baumanngeorg.uvilsfrechner.datasources.dwd.DwdClient;
 
 public class CalculationFragment extends Fragment {
     private TextView tvUvi;
@@ -119,7 +119,7 @@ public class CalculationFragment extends Fragment {
 
     @Override
     public void onResume() {
-        UviRetrievingService.getInstance().setUvi(this);
+        DwdClient.getInstance().setUvi(this);
         sbZeit.setProgress((int) Math.round(((SunRiseSetCalculationService.INSTANCE.getSunshineDuration() - 30D) / 30D)));
         setMedScale();
         updateSeekBarValues();

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import de.baumanngeorg.uvilsfrechner.R;
-import de.baumanngeorg.uvilsfrechner.datasource.InternetResourceLoader;
+import de.baumanngeorg.uvilsfrechner.config.InternetResourceLoader;
 import de.baumanngeorg.uvilsfrechner.service.StorageService;
 import de.baumanngeorg.uvilsfrechner.view.about.AboutActivity;
 import de.baumanngeorg.uvilsfrechner.view.settings.SettingsActivity;

@@ -1,4 +1,4 @@
-package de.baumanngeorg.uvilsfrechner.datasource.dwd.model
+package de.baumanngeorg.uvilsfrechner.datasources.dwd.model
 
 data class DwdUviForecast(
         val today: Int = 8,

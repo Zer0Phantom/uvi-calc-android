@@ -1,4 +1,4 @@
-package de.baumanngeorg.uvilsfrechner.datasource.dwd.model
+package de.baumanngeorg.uvilsfrechner.datasources.dwd.model
 
 import de.baumanngeorg.uvilsfrechner.config.toString
 import java.util.*

@@ -7,7 +7,7 @@ import androidx.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 
-import de.baumanngeorg.uvilsfrechner.datasource.dwd.model.DwdContainer;
+import de.baumanngeorg.uvilsfrechner.datasources.dwd.model.DwdContainer;
 
 public class StorageService {
 
@@ -47,12 +47,13 @@ public class StorageService {
         return Integer.parseInt(preferences.getString(MED_STEPS, "25"));
     }
 
-    public void setStoredUviContainer(DwdContainer container) {
-        preferences.edit().putString(DwdContainer.class.getCanonicalName(), (new Gson()).toJson(container)).apply();
+    public DwdContainer getStoredUviContainer() {
+        String containerString = (new Gson()).toJson(new DwdContainer());
+        return (new Gson()).fromJson(preferences.getString(DwdContainer.class.getCanonicalName(), containerString), DwdContainer.class);
     }
 
-    public DwdContainer getStoredUviContainer() {
-        return (new Gson()).fromJson(preferences.getString(DwdContainer.class.getCanonicalName(), null), DwdContainer.class);
+    public void setStoredUviContainer(DwdContainer container) {
+        preferences.edit().putString(DwdContainer.class.getCanonicalName(), (new Gson()).toJson(container)).apply();
     }
 
     public int getDefaultMed() {
