@@ -10,9 +10,9 @@ data class DwdContainer(
     fun getUpdateString(city: String): String {
         val forecast = getContentByCity(city).forecast
         return StringBuilder("Vorhersage für $city:\n")
-                .append("${forecastDayPlusDays(0)} UV ${forecast.today} | ")
-                .append("${forecastDayPlusDays(1)} UV ${forecast.tomorrow} | ")
-                .append("${forecastDayPlusDays(2)} UV ${forecast.dayafter_to}\n")
+                .append("${forecastDayPlusDays(0).time.toString("dd.MM.")} UV ${forecast.today} | ")
+                .append("${forecastDayPlusDays(1).time.toString("dd.MM.")} UV ${forecast.tomorrow} | ")
+                .append("${forecastDayPlusDays(2).time.toString("dd.MM.")} UV ${forecast.dayafter_to}\n")
                 .append("Daten vom ${lastUpdate.time.toString("dd.MM.' 'hh:mm' Uhr'")}\n")
                 .append("Quelle: ${model.sender}")
                 .toString()
@@ -25,10 +25,10 @@ data class DwdContainer(
 
     val nextUpdate = getDateFromDwdString(model.next_update)
 
-    fun forecastDayPlusDays(amountDays: Int): String {
+    fun forecastDayPlusDays(amountDays: Int): Calendar {
         val date = forecastDay()
         date.add(Calendar.DAY_OF_MONTH, amountDays)
-        return date.time.toString("dd.MM.")
+        return date
     }
 
     private fun forecastDay(): Calendar {
