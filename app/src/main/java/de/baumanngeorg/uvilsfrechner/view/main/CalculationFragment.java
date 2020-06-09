@@ -112,7 +112,7 @@ public class CalculationFragment extends Fragment {
                 // needed here
             }
         });
-        sbMed.setProgress(StorageService.getInstance().getDefaultMed());
+        sbMed.setProgress(StorageService.INSTANCE.getDefaultMed());
 
         super.onStart();
     }
@@ -161,7 +161,7 @@ public class CalculationFragment extends Fragment {
     }
 
     private int getMed() {
-        StorageService.getInstance().setDefaultMed(sbMed.getProgress());
+        StorageService.INSTANCE.setDefaultMed(sbMed.getProgress());
         int[] scaleParams = getMedScale();
         int med = sbMed.getProgress() * scaleParams[2] + scaleParams[1];
         tvMed.setText(String.valueOf(med));
@@ -171,7 +171,7 @@ public class CalculationFragment extends Fragment {
     private void setMedScale() {
         int[] scaleParams = getMedScale();
         sbMed.setMax((scaleParams[0] - scaleParams[1]) / scaleParams[2]);
-        sbMed.setProgress(StorageService.getInstance().getDefaultMed());
+        sbMed.setProgress(StorageService.INSTANCE.getDefaultMed());
     }
 
     /**
@@ -180,7 +180,7 @@ public class CalculationFragment extends Fragment {
     private int[] getMedScale() {
         int min;
         int max;
-        switch (StorageService.getInstance().getPreferredSkinType()) {
+        switch (StorageService.INSTANCE.getPreferredSkinType()) {
             case 1:
                 min = 150;
                 max = 300;
@@ -207,7 +207,7 @@ public class CalculationFragment extends Fragment {
                 max = 400;
                 break;
         }
-        int steps = StorageService.getInstance().getPreferredMedSteps();
+        int steps = StorageService.INSTANCE.getPreferredMedSteps();
         return new int[]{max, min, steps};
     }
 

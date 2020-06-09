@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Load Preferences
-        StorageService.INSTANCE.initilizeService(this.getApplicationContext());
+        StorageService.INSTANCE.initialiseService(this.getApplicationContext());
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);

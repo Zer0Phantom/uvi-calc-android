@@ -15,42 +15,42 @@ object StorageService {
     private const val DEFAULT_MED = "default_med"
 
     private var context: Context? = null
+    private var preferences: SharedPreferences? = null
 
-    fun initilizeService(context: Context) {
+    fun initialiseService(context: Context) {
         this.context = context
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(context)
     }
 
-    private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
     val preferredCity: String
-        get() = preferences.getString(STADT, "Berlin")!!
+        get() = preferences?.getString(STADT, "Berlin")!!
 
     val preferredSkinType: Int
-        get() = preferences.getString(SKIN_TYPE, "2")!!.toInt()
+        get() = preferences?.getString(SKIN_TYPE, "2")!!.toInt()
 
     val preferredMedSteps: Int
-        get() = preferences.getString(MED_STEPS, "25")!!.toInt()
+        get() = preferences?.getString(MED_STEPS, "25")!!.toInt()
 
     var storedUviContainer: DwdContainer
         get() {
             val containerString = Gson().toJson(DwdContainer())
-            return Gson().fromJson(preferences.getString(DwdContainer::class.java.canonicalName, containerString), DwdContainer::class.java)
+            return Gson().fromJson(preferences?.getString(DwdContainer::class.java.canonicalName, containerString), DwdContainer::class.java)
         }
         set(container) {
-            preferences.edit().putString(DwdContainer::class.java.canonicalName, Gson().toJson(container)).apply()
+            preferences?.edit()?.putString(DwdContainer::class.java.canonicalName, Gson().toJson(container))?.apply()
         }
 
     var defaultMed: Int
-        get() = preferences.getString(DEFAULT_MED, "2")!!.toInt()
+        get() = preferences?.getString(DEFAULT_MED, "2")!!.toInt()
         set(defaultMed) {
-            preferences.edit().putString(DEFAULT_MED, defaultMed.toString()).apply()
+            preferences?.edit()?.putString(DEFAULT_MED, defaultMed.toString())?.apply()
         }
 
     val isDsgvoAccepted: Boolean
-        get() = "true" == preferences.getString(DSGVO, "false")
+        get() = "true" == preferences?.getString(DSGVO, "false")
 
     fun setDsgvoAccepted() {
-        preferences.edit().putString(DSGVO, "true").apply()
+        preferences?.edit()?.putString(DSGVO, "true")?.apply()
     }
 
 }

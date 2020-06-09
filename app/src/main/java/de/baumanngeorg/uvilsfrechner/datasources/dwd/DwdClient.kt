@@ -33,7 +33,7 @@ object DwdClient {
                 StorageService.storedUviContainer = container
                 calculationFragment.setUviSeekbar(getUviDependendOnDate(today, uviContentNew))
                 calculationFragment.setUpdateString(container.getUpdateString(uviContentNew.city))
-            }, Response.ErrorListener { error: VolleyError? -> })
+            }, Response.ErrorListener {})
             stringRequest.tag = "UVI"
             InternetResourceLoader.addRequest(stringRequest, calculationFragment.context)
         } else {
