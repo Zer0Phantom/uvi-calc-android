@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import de.baumanngeorg.uvilsfrechner.R;
-import de.baumanngeorg.uvilsfrechner.config.InternetResourceLoader;
 import de.baumanngeorg.uvilsfrechner.service.StorageService;
 import de.baumanngeorg.uvilsfrechner.view.about.AboutActivity;
 import de.baumanngeorg.uvilsfrechner.view.settings.SettingsActivity;
@@ -22,28 +21,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Load Preferences
-        StorageService.initializeSettingsmanager(this.getApplicationContext());
-
-        // Load Network Connection
-        InternetResourceLoader.initializeInternetResourceLoader(this.getApplicationContext());
+        StorageService.INSTANCE.initilizeService(this.getApplicationContext());
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (StorageService.getInstance().isDsgvoAccepted()) {
+        if (StorageService.INSTANCE.isDsgvoAccepted()) {
             onCreateAfterDsgvo();
         } else {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this)
                     .setMessage("Der DWD speichert die IP für maximal sieben Tage zur Verbesserung des Service.")
                     .setTitle("Datenschutzbedingungen")
                     .setPositiveButton("Zustimmen", (dialog, which) -> {
-                        StorageService.getInstance().setDsgvoAccepted();
+                        StorageService.INSTANCE.setDsgvoAccepted();
                         onCreateAfterDsgvo();
                     })
                     .setNegativeButton("Ablehnen", (dialog, which) -> MainActivity.super.finish())
                     .setOnDismissListener(dialog -> {
-                        if (StorageService.getInstance().isDsgvoAccepted()) {
+                        if (StorageService.INSTANCE.isDsgvoAccepted()) {
                             onCreateAfterDsgvo();
                         } else {
                             MainActivity.super.finish();

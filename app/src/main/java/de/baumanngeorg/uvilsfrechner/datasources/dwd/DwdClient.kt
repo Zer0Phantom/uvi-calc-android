@@ -14,14 +14,14 @@ import de.baumanngeorg.uvilsfrechner.view.main.CalculationFragment
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-data class DwdClient(
-        private val gson: Gson = Gson(),
-        private val url: String = "https://opendata.dwd.de/climate_environment/health/alerts/uvi.json",
-        private var container: DwdContainer = StorageService.getInstance().storedUviContainer
-) {
+object DwdClient {
+    private val gson: Gson = Gson()
+    private const val url: String = "https://opendata.dwd.de/climate_environment/health/alerts/uvi.json"
+    private var container: DwdContainer = StorageService.storedUviContainer
+
     fun setUvi(calculationFragment: CalculationFragment) {
         val today = Calendar.getInstance()
-        val stadt = StorageService.getInstance().preferredCity
+        val stadt = StorageService.preferredCity
         val uviContent = container.getContentByCity(stadt)
         if (today.after(container.nextUpdate)) {
             val stringRequest = StringRequest(
@@ -30,12 +30,12 @@ data class DwdClient(
                 val value = String(ptext, StandardCharsets.UTF_8)
                 container.model = gson.fromJson(value, DwdUviModel::class.java)
                 val uviContentNew = container.getContentByCity(stadt)
-                StorageService.getInstance().storedUviContainer = container
+                StorageService.storedUviContainer = container
                 calculationFragment.setUviSeekbar(getUviDependendOnDate(today, uviContentNew))
                 calculationFragment.setUpdateString(container.getUpdateString(uviContentNew.city))
             }, Response.ErrorListener { error: VolleyError? -> })
             stringRequest.tag = "UVI"
-            InternetResourceLoader.getInstance().addRequest(stringRequest)
+            InternetResourceLoader.addRequest(stringRequest, calculationFragment.context)
         } else {
             calculationFragment.setUviSeekbar(getUviDependendOnDate(today, uviContent))
             calculationFragment.setUpdateString(container.getUpdateString(uviContent.city))

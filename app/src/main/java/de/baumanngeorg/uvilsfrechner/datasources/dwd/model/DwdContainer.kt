@@ -31,7 +31,7 @@ data class DwdContainer(
         return date.time.toString("dd.MM.")
     }
 
-    fun forecastDay(): Calendar {
+    private fun forecastDay(): Calendar {
         val date = model.forecast_day.split("-").map { it.toInt() }
         val calendar = Calendar.getInstance()
         calendar.set(date[0], date[1] - 1, date[2])
