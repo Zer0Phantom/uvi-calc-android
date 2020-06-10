@@ -13,6 +13,7 @@ object StorageService {
     private const val SKIN_TYPE = "hauttyp"
     private const val MED_STEPS = "med_schritte"
     private const val DEFAULT_MED = "default_med"
+    private const val CONTAINER = "container"
 
     private var context: Context? = null
     private var preferences: SharedPreferences? = null
@@ -34,10 +35,10 @@ object StorageService {
     var storedUviContainer: DwdContainer
         get() {
             val containerString = Gson().toJson(DwdContainer())
-            return Gson().fromJson(preferences?.getString(DwdContainer::class.java.canonicalName, containerString), DwdContainer::class.java)
+            return Gson().fromJson(preferences?.getString(CONTAINER, containerString), DwdContainer::class.java)
         }
         set(container) {
-            preferences?.edit()?.putString(DwdContainer::class.java.canonicalName, Gson().toJson(container))?.apply()
+            preferences?.edit()?.putString(CONTAINER, Gson().toJson(container))?.apply()
         }
 
     var defaultMed: Int

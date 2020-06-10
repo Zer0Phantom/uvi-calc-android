@@ -23,5 +23,5 @@ fun Calendar.toDdMmString(): String {
  * returns the Calendar's date as dd.MM. HH:mm -> 2020-09-31_15-30 -> 31.09. 15:30 Uhr
  */
 fun Calendar.toDdMmHhMmString(): String {
-    return this.toString("dd.MM.' 'HH:mm' 'Uhr")
+    return this.toString("dd.MM.' 'HH:mm' Uhr'")
 }
