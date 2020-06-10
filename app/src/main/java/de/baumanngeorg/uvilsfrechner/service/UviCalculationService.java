@@ -44,6 +44,6 @@ public class UviCalculationService {
         int restHoursOutside = (int) restOutside / 60;
         int restMinutesOutside = (int) restOutside % 60;
 
-        return (restHoursOutside > 0 ? (restHoursOutside + "h") : "") + (restMinutesOutside > 0 ? (" " + restMinutesOutside + "min") : "0 min");
+        return (restHoursOutside > 0 ? (restHoursOutside + "h") : "") + (restMinutesOutside > 0 ? (" " + restMinutesOutside + "min") : " 0min");
     }
 }
