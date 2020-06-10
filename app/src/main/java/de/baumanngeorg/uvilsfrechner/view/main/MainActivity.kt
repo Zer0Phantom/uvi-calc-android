@@ -28,12 +28,12 @@ class MainActivity : AppCompatActivity() {
             val alertBuilder = AlertDialog.Builder(this)
                     .setMessage("Der DWD speichert die IP für maximal sieben Tage zur Verbesserung des Service.")
                     .setTitle("Datenschutzbedingungen")
-                    .setPositiveButton("Zustimmen") { dialog: DialogInterface?, which: Int ->
+                    .setPositiveButton("Zustimmen") { _: DialogInterface?, _: Int ->
                         StorageService.setDsgvoAccepted()
                         onCreateAfterDsgvo()
                     }
-                    .setNegativeButton("Ablehnen") { dialog: DialogInterface?, which: Int -> super@MainActivity.finish() }
-                    .setOnDismissListener { dialog: DialogInterface? ->
+                    .setNegativeButton("Ablehnen") { _: DialogInterface?, _: Int -> super@MainActivity.finish() }
+                    .setOnDismissListener {
                         if (StorageService.isDsgvoAccepted) {
                             onCreateAfterDsgvo()
                         } else {
