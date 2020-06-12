@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+/**
+ * Use the number of seconds/10 since Jan 1 2016 as the versionCode.
+ * This lets us upload a new build at most every 10 seconds for the
+ * next 680 years.
+ */
+def vcode = (int)(((new Date().getTime()/1000) - 1451606400) / 100)
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -9,8 +16,8 @@ android {
         applicationId "de.baumanngeorg.uvilsfrechner"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 18
-        versionName "1.2.6"
+        versionCode vcode
+        versionName "1.2.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

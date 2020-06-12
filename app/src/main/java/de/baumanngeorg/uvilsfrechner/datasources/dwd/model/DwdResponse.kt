@@ -24,7 +24,7 @@ data class DwdResponse(
     }
 
     fun getForecastForCity(city: String): UviForecast {
-        return content.single { it.city == city }.uviForecast
+        return content.single { it.city == city }.forecast
     }
 
     fun getUpdateString(city: String): String {

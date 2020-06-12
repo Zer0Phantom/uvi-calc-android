@@ -8,6 +8,9 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.BasicNetwork
 import com.android.volley.toolbox.DiskBasedCache
 import com.android.volley.toolbox.HurlStack
+import mu.KotlinLogging
+
+private val logger = KotlinLogging.logger {}
 
 object InternetResourceLoader {
     private var queue: RequestQueue? = null
@@ -19,6 +22,7 @@ object InternetResourceLoader {
     }
 
     fun addRequest(request: Request<*>?) {
+        logger.info { request }
         queue!!.add(request)
     }
 
