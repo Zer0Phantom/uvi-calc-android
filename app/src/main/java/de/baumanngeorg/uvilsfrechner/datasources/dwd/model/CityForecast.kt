@@ -1,6 +1,6 @@
 package de.baumanngeorg.uvilsfrechner.datasources.dwd.model
 
-data class DwdUviContent(
+data class CityForecast(
     val city: String = "Berlin",
-    val forecast: DwdUviForecast = DwdUviForecast()
+    val uviForecast: UviForecast = UviForecast()
 )

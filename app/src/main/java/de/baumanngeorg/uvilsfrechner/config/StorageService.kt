@@ -1,10 +1,10 @@
-package de.baumanngeorg.uvilsfrechner.service
+package de.baumanngeorg.uvilsfrechner.config
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
-import de.baumanngeorg.uvilsfrechner.datasources.dwd.model.DwdContainer
+import de.baumanngeorg.uvilsfrechner.datasources.dwd.model.DwdResponse
 
 object StorageService {
 
@@ -13,14 +13,13 @@ object StorageService {
     private const val SKIN_TYPE = "hauttyp"
     private const val MED_STEPS = "med_schritte"
     private const val DEFAULT_MED = "default_med"
-    private const val CONTAINER = "container"
+    private const val DWD_MODEL = "dwd-model"
 
-    private var context: Context? = null
+    private val gsonInstance = Gson()
     private var preferences: SharedPreferences? = null
 
     fun initialiseService(context: Context) {
-        this.context = context
-        this.preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        preferences = PreferenceManager.getDefaultSharedPreferences(context)
     }
 
     val preferredCity: String
@@ -32,13 +31,13 @@ object StorageService {
     val preferredMedSteps: Int
         get() = preferences?.getString(MED_STEPS, "25")!!.toInt()
 
-    var storedUviContainer: DwdContainer
+    var dwdModel: DwdResponse
         get() {
-            val containerString = Gson().toJson(DwdContainer())
-            return Gson().fromJson(preferences?.getString(CONTAINER, containerString), DwdContainer::class.java)
+            val modelString = gsonInstance.toJson(DwdResponse())
+            return gsonInstance.fromJson(preferences?.getString(DWD_MODEL, modelString), DwdResponse::class.java)
         }
-        set(container) {
-            preferences?.edit()?.putString(CONTAINER, Gson().toJson(container))?.apply()
+        set(model) {
+            preferences?.edit()?.putString(DWD_MODEL, gsonInstance.toJson(model))?.apply()
         }
 
     var defaultMed: Int
@@ -53,5 +52,4 @@ object StorageService {
     fun setDsgvoAccepted() {
         preferences?.edit()?.putString(DSGVO, "true")?.apply()
     }
-
 }

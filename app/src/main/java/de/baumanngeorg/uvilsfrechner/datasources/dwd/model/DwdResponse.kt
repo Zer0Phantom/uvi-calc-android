@@ -5,26 +5,26 @@ import de.baumanngeorg.uvilsfrechner.config.toDdMmString
 import java.util.*
 
 @Suppress("kotlin:S117")
-data class DwdUviModel(
+data class DwdResponse(
     val last_update: String = "2000-01-01T10:10:10",
     val next_update: String = "2000-01-01T10:10:10",
     val forecast_day: String = "2000-01-01",
     val name: String = "XTX",
     val sender: String = "XTX",
-    val content: List<DwdUviContent> = listOf(DwdUviContent())
+    val content: List<CityForecast> = listOf(CityForecast())
 ) {
 
-    fun getLastUpdateCalendar() = stringToCalendar(last_update)
+    private fun getLastUpdateCalendar() = stringToCalendar(last_update)
     fun getNextUpdateCalendar() = stringToCalendar(next_update)
-    fun getForecastDayCalendar() = stringToCalendar(forecast_day)
-    fun getForecastDayCalendar(days: Int): Calendar {
+    private fun getForecastDayCalendar() = stringToCalendar(forecast_day)
+    private fun getForecastDayCalendar(days: Int): Calendar {
         val date = getForecastDayCalendar()
         date.add(Calendar.DAY_OF_MONTH, days)
         return date
     }
 
-    fun getForecastForCity(city: String): DwdUviForecast {
-        return content.single { it.city == city }.forecast
+    fun getForecastForCity(city: String): UviForecast {
+        return content.single { it.city == city }.uviForecast
     }
 
     fun getUpdateString(city: String): String {
@@ -36,6 +36,16 @@ data class DwdUviModel(
             .append("Daten vom ${getLastUpdateCalendar().toDdMmHhMmString()}\n")
             .append("Quelle: ${sender}")
             .toString()
+    }
+
+    fun getTodaysForecast(city: String): Int {
+        val today = Calendar.getInstance()
+        val uviForecast = getForecastForCity(city)
+        return when {
+            today.before(getForecastDayCalendar(1)) -> uviForecast.today
+            today.before(getForecastDayCalendar(2)) -> uviForecast.tomorrow
+            else -> uviForecast.dayafter_to
+        }
     }
 
     private fun stringToCalendar(dateString: String): Calendar {

@@ -12,12 +12,13 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import de.baumanngeorg.uvilsfrechner.R
+import de.baumanngeorg.uvilsfrechner.config.StorageService.defaultMed
+import de.baumanngeorg.uvilsfrechner.config.StorageService.preferredMedSteps
+import de.baumanngeorg.uvilsfrechner.config.StorageService.preferredSkinType
 import de.baumanngeorg.uvilsfrechner.datasources.dwd.DwdClient.setUvi
-import de.baumanngeorg.uvilsfrechner.service.StorageService.defaultMed
-import de.baumanngeorg.uvilsfrechner.service.StorageService.preferredMedSteps
-import de.baumanngeorg.uvilsfrechner.service.StorageService.preferredSkinType
 import de.baumanngeorg.uvilsfrechner.service.SunRiseSetCalculationService.getSunshineDuration
 import de.baumanngeorg.uvilsfrechner.service.UviCalculationHub
+import kotlin.math.roundToInt
 
 class CalculationFragment : Fragment() {
 
@@ -35,8 +36,8 @@ class CalculationFragment : Fragment() {
     private var tvUviInfo: TextView? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
@@ -98,7 +99,7 @@ class CalculationFragment : Fragment() {
 
     override fun onResume() {
         setUvi(this)
-        sbZeit!!.progress = Math.round((getSunshineDuration() - 30.0) / 30.0).toInt()
+        sbZeit!!.progress = ((getSunshineDuration() - 30.0) / 30.0).roundToInt()
         setMedScale()
         updateSeekBarValues()
         super.onResume()
@@ -114,11 +115,11 @@ class CalculationFragment : Fragment() {
 
     private fun updateSeekBarValues() {
         val hub = UviCalculationHub(
-                minAlreadySpend = minAlreadySpend,
-                uvi = uvi,
-                med = med,
-                lsf = lsf,
-                zeit = zeit
+            minAlreadySpend = minAlreadySpend,
+            uvi = uvi,
+            med = med,
+            lsf = lsf,
+            zeit = zeit
         )
         tvHowLongOutside!!.text = hub.howLongOutside
         tvWhatLsf!!.text = hub.whatLsf
@@ -165,22 +166,27 @@ class CalculationFragment : Fragment() {
                     min = 150
                     max = 300
                 }
+
                 3 -> {
                     min = 300
                     max = 500
                 }
+
                 4 -> {
                     min = 450
                     max = 600
                 }
+
                 5 -> {
                     min = 600
                     max = 900
                 }
+
                 6 -> {
                     min = 900
                     max = 1500
                 }
+
                 else -> {
                     min = 250
                     max = 400
