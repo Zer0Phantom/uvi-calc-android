@@ -12,10 +12,13 @@ import com.android.volley.toolbox.HurlStack
 object InternetResourceLoader {
     private var queue: RequestQueue? = null
 
-    fun addRequest(request: Request<*>?, context: Context?) {
+    fun initialiseService(context: Context?){
         if(queue == null){
             queue = getQueue(context)
         }
+    }
+
+    fun addRequest(request: Request<*>?) {
         queue!!.add(request)
     }
 
