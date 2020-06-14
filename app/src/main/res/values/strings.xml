@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">UVI</string>
+    <string name="large_text_about">
+        "
+        Dieses Programm unterstützt den mündigen Bürger bei der Auswahl der richtigen Sonnencreme.
+
+        Abhängen tut dies vom UVI, MED, LSF, und der gewünschten und bisher draußen verbrachten Zeit.
+
+        Klingt kompliziert? Nun, das ist es auch ein bisschen, daher diese App!
+
+
+        Der <b><a href="https://de.wikipedia.org/wiki/UV-Index">UVI</a></b> (UV-Index)
+        bezeichnet die stärke der Sonneneinstrahlung, also der Energie, die für einen Tag erwartet werden
+        kann. Sie wird vom DWD täglich für den aktuellen und die nächsten zwei Tage veröffentlicht.
+        Je höher der UVI ist, desto stärker die Sonne. Die Skala geht von 0 (praktisch keine Sonneneinstrahlung
+        bis …, ja unendlich! Aber oft wird nur 15 gebraucht, und auch das ist schon ziemlich hoch! Für
+        gewöhnlich gibt es in Deutschland im Sommer einen mittlere Strahlung von UVI 8. Und da sollte
+        man auch schon vorsichtig sein. Wie vorsichtig? Na nutze die App!\n\n
+
+        Die <b><a href="https://de.wikipedia.org/wiki/Minimale_Erythemdosis">MED</a></b> (minimale Erythemdosis)
+        ist eine Bemessung der Sonnentoleranz der eigenen Haut. Für jeden
+        <a href="https://de.wikipedia.org/wiki/Hauttyp">Hauttyp</a> gibt es eine Spannbreite
+        von möglichen Werten. Generell gilt: Je gebräunter desto höher die MED, aber ohne die Selbstbräuner oder
+        Solarienbräune zu beachten! Auch kann die genaue MED nur von einem Hautarzt bestimmt werden.\n\n
+
+        Der <b><a href="https://de.wikipedia.org/wiki/Lichtschutzfaktor">LSF</a></b> (Lichtschutzfaktor)
+        einer Sonnencreme oder Equipment gibt an, um wie viele Minuten sich die Eigenschutzzeit der Haut
+        verlängert, wenn der Schutz regelmäßig erneuert wird. Also erhöht ein merhmaliges Auftragen einer
+        LSF 50 Creme nicht den Schutz, sondern verlängert lediglich die Wirkung, so dass der Schutz überhaupt
+        erhalten bleibt! Sollte vorher die Eigenschutzzeit bereits aufgebraucht worden sein, dann bringt
+        auch ein höherer LSF nichts mehr. Bedenke: Lichtschutz<b>faktor</b>, und Null mit 35 zu multiplizieren
+        ist genauso hilfreich wie 75.\n\n
+
+        Die <b>Formel</b>
+        Ist die MED/(1.5xUVI)=Eigenschutzzeit der Haut in Minuten. Die bisher ungeschützte Zeit wird davon
+        abgezogen, ehe sie mit dem aufgetragenen LSF multipliziert wird. Heraus kommt die gesamte mögliche Zeit,
+        die mit gutem Gewissen draußen verbracht werden kann, da hier der UVI mit Zwei multiplizert wird und der LSF in seiner Wirkung halbiert wird.
+        Also: (MED/(2xUVI)-bisherigeZeit)*(LSF/2). Nur, um sicher zu gehen.
+        Aber natürlich gilt immer: Schatten vor Sonne! Und bitte vorher über die <a href="https://www.derwesten.de/gesundheit/vor-diesen-irrtuemern-warnen-experten-beim-sonnenschutz-id11936847.html">Vorurteile</a> und Hintergründe aufklären! \n\n
+
+        <b>Sonstiges</b>
+        Die App stellt beim start den UVI immer auf den aktuellen Wert des DWD für den Standort in den Einstellungen ein.
+        Außerdem wird die astronomische Sonnenscheindauer als gewünschter Wert festgelegt, den man draußen
+        verbringen möchte. Es gilt also lediglich diesen LSF zu wählen um glücklich zu sein. Ansonsten kann
+        die App zum Ausprobieren genutzt werden.\n\n
+
+        <b>Datenschutz</b>
+        Hier, ähm, steht nichts, weil wir stolz sind keinerlei Daten aufzunehmen. Lediglich der DWD
+        speichert die IP für den Abruf des UVIs für maximal sieben Tage. Mehr Infos dazu <a href="https://opendata.dwd.de/README.txt">hier</a>.
+        "
+    </string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="title_activity_about">Über die App</string>
+    <string name="about_image_descr">Eine gelbe Sonne auf blauem Grund.</string>
+    <string name="about_subtitle">Was gibt es besseres,\nals gut geschützt zu sein?</string>
+    <string name="first_zeit">Zeit</string>
+    <string name="first_1_15">1:15</string>
+    <string name="first_lsf_15">LSF 15</string>
+    <string name="first_welchen_lsf_ben_tige_ich">Welchen LSF benötige ich?</string>
+    <string name="first_pflichteingaben">Pflichteingaben</string>
+    <string name="uvi">UVI</string>
+    <string name="med">MED</string>
+    <string name="first_8">8</string>
+    <string name="first_275">275</string>
+    <string name="first_wie_lange_kann_ich_noch_drau_en_bleiben">Wie lange kann ich noch Draußen bleiben?</string>
+    <string name="lsf">LSF</string>
+    <string name="first_15">15</string>
+    <string name="first_0_00">0:00</string>
+    <string name="first_35">35</string>
+    <string name="first_no_internet_warning">Kein Internet verfügbar für ein Live-UVI-Update!</string>
+    <string name="unsheltered">Bisher ungeschützt (letzte 24h)</string>
+</resources>
