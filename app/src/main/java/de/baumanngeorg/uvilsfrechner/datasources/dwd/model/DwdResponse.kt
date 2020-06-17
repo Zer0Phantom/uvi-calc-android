@@ -2,7 +2,7 @@ package de.baumanngeorg.uvilsfrechner.datasources.dwd.model
 
 import de.baumanngeorg.uvilsfrechner.config.toDdMmHhMmString
 import de.baumanngeorg.uvilsfrechner.config.toDdMmString
-import java.util.*
+import java.util.Calendar
 
 @Suppress("kotlin:S117")
 data class DwdResponse(
@@ -60,7 +60,14 @@ data class DwdResponse(
 
             else -> {
                 val timeArray = calendarArray[1].split(":").map { it.toInt() }
-                calendar.set(dateArray[0], dateArray[1] - 1, dateArray[2], timeArray[0], timeArray[1], timeArray[2])
+                calendar.set(
+                    dateArray[0],
+                    dateArray[1] - 1,
+                    dateArray[2],
+                    timeArray[0],
+                    timeArray[1],
+                    timeArray[2]
+                )
                 calendar
             }
         }

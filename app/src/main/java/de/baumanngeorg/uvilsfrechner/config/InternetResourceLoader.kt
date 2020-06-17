@@ -15,8 +15,8 @@ private val logger = KotlinLogging.logger {}
 object InternetResourceLoader {
     private var queue: RequestQueue? = null
 
-    fun initialiseService(context: Context?){
-        if(queue == null){
+    fun initialiseService(context: Context?) {
+        if (queue == null) {
             queue = getQueue(context)
         }
     }

@@ -3,12 +3,13 @@ package de.baumanngeorg.uvilsfrechner.service
 import kotlin.math.roundToInt
 
 data class UviCalculationHub(
-        private val uvi: Int = 0,
-        private val zeit: Int = 0,
-        private val med: Int = 0,
-        private var lsf: Int = 0,
-        private val minAlreadySpend: Int = 0
+    private val uvi: Int = 0,
+    private val zeit: Int = 0,
+    private val med: Int = 0,
+    private var lsf: Int = 0,
+    private val minAlreadySpend: Int = 0
 ) {
+
     // Calculation Zeit/((MED/(2*UVI) - minAlreadySpend)
     val whatLsf: String
         get() {
