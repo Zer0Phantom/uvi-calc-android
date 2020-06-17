@@ -3,10 +3,12 @@ apply plugin: 'kotlin-android'
 
 /**
  * Use the number of seconds/10 since Jan 1 2016 as the versionCode.
- * This lets us upload a new build at most every 10 seconds for the
+ * This lets us upload a new build at most every 100 seconds for the
  * next 680 years.
  */
-def vcode = (int)(((new Date().getTime()/1000) - 1451606400) / 100)
+def date = new Date()
+def vcode = (int)(((date.getTime()/1000) - 1451606400) / 100)
+def dateStamp = date.toInstant().toString().split("T")[0]
 
 android {
     compileSdkVersion 29
@@ -14,10 +16,10 @@ android {
 
     defaultConfig {
         applicationId "de.baumanngeorg.uvilsfrechner"
-        minSdkVersion 23
+        minSdkVersion 14
         targetSdkVersion 29
         versionCode vcode
-        versionName "1.2.8"
+        versionName "1.2.8-"+dateStamp
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,6 +27,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -34,8 +37,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = "1.8"
-        targetCompatibility = "1.8"
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
 }
