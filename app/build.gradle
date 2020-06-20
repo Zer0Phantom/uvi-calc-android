@@ -16,10 +16,10 @@ android {
 
     defaultConfig {
         applicationId "de.baumanngeorg.uvilsfrechner"
-        minSdkVersion 14
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode vcode
-        versionName "1.2.8-"+dateStamp
+        versionName "1.2.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
