@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:fontFamily="serif"
-        android:justificationMode="none"
         android:text="@string/large_text_about"
         android:textAlignment="viewStart"
         android:textSize="15sp" />
