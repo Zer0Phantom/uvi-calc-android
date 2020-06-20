@@ -1,7 +1,7 @@
 package de.baumanngeorg.uvilsfrechner.service
 
 import ca.rmen.sunrisesunset.SunriseSunset
-import java.util.*
+import java.util.Calendar
 import kotlin.math.roundToLong
 
 internal object SunRiseSetCalculationService {

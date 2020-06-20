@@ -214,7 +214,8 @@ class CalculationFragment : Fragment() {
     private val zeit: Int
         get() {
             val zeitInMiunten = sbZeit!!.progress * 30 + 30
-            val zeitText = (zeitInMiunten / 60).toString() + ":" + if (zeitInMiunten % 60 == 0) "00" else "30"
+            val zeitText =
+                (zeitInMiunten / 60).toString() + ":" + if (zeitInMiunten % 60 == 0) "00" else "30"
             tvZeit!!.text = zeitText
             return zeitInMiunten
         }

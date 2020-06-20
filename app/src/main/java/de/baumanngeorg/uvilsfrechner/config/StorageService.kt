@@ -34,7 +34,10 @@ object StorageService {
     var dwdModel: DwdResponse
         get() {
             val modelString = gsonInstance.toJson(DwdResponse())
-            return gsonInstance.fromJson(preferences?.getString(DWD_MODEL, modelString), DwdResponse::class.java)
+            return gsonInstance.fromJson(
+                preferences?.getString(DWD_MODEL, modelString),
+                DwdResponse::class.java
+            )
         }
         set(model) {
             preferences?.edit()?.putString(DWD_MODEL, gsonInstance.toJson(model))?.apply()
